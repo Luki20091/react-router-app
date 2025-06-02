@@ -5,6 +5,27 @@ Prosta galeria zdjęć w React, która pobiera zdjęcia z Pixabay API i sortuje 
 ## Instalacja
 
 1. Sklonuj repozytorium:
+
    ```bash
-   git clone <URL_DO_REPO>
+   git clone https://github.com/Luki20091/photo-gallery.git
    cd photo-gallery
+   ```
+
+2. Zainstaluj zależności:
+
+   ```bash
+   npm install
+   npm install axios
+   ```
+
+4. Uruchom projekt:
+
+   ```bash
+   npm start
+   ```
+
+## Użycie
+
+- Wybierz kategorię (nature, animals, technology).
+- Obejrzyj 9 losowych miniatur zdjęć.
+- Kliknij na miniaturę, aby otworzyć modal z powiększonym zdjęciem.
