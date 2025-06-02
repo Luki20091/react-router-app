@@ -1,62 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useParams, Navigate } from 'react-router-dom';
 
-const API_KEY = '50647637-950dc4fd43247efaedb5068b0'; //it can be public, I don't use it for anything sensitive
-const categories = ['nature', 'animals', 'technology'];
+// Komponenty stron
+const Home = () => <h2>Strona główna</h2>;
+const About = () => <h2>O nas</h2>;
+const Contact = () => <h2>Kontakt</h2>;
 
-export default function App() {
-  const [images, setImages] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('nature');
-  const [modalImage, setModalImage] = useState(null);
+const User = () => {
+  const { name } = useParams();
+  return <h2>Witaj, {name}!</h2>;
+};
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await axios.get(
-          `https://pixabay.com/api/?key=${API_KEY}&q=${selectedCategory}&image_type=photo&per_page=9`
-        );
-        setImages(res.data.hits);
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
-    };
-    fetchImages();
-  }, [selectedCategory]);
+const NotFound = () => <h2>404 – Nie znaleziono strony</h2>;
 
+// Komponent nawigacji
+const Navigation = () => (
+  <nav style={{ marginBottom: '20px' }}>
+    <Link to="/" style={{ marginRight: 10 }}>Home</Link>
+    <Link to="/about" style={{ marginRight: 10 }}>About</Link>
+    <Link to="/contact" style={{ marginRight: 10 }}>Contact</Link>
+    <Link to="/user/Janek" style={{ marginRight: 10 }}>User Janek</Link>
+  </nav>
+);
+
+function App() {
   return (
-    <div className="app-container">
-      <h1>Galeria zdjęć</h1>
-
-      <div className="buttons-container">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`category-btn ${selectedCategory === cat ? 'active' : ''}`}
-          >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </button>
-        ))}
+    <Router>
+      <div>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/user/:name" element={<User />} />
+          <Route path="*" element={<NotFound />} /> {/* catch-all */}
+        </Routes>
       </div>
-
-      <div className="gallery-grid">
-        {images.map((image) => (
-          <img
-            key={image.id}
-            src={image.previewURL}
-            alt={image.tags}
-            className="thumbnail"
-            onClick={() => setModalImage(image.largeImageURL)}
-          />
-        ))}
-      </div>
-
-      {modalImage && (
-        <div className="modal-overlay" onClick={() => setModalImage(null)}>
-          <img src={modalImage} alt="Large view" className="modal-image" />
-        </div>
-      )}
-    </div>
+    </Router>
   );
 }
+
+export default App;

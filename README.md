@@ -1,21 +1,21 @@
-# Photo Gallery
+# React Router App
 
-Prosta galeria zdjęć w React, która pobiera zdjęcia z Pixabay API i sortuje je w 3 kategoriach: **nature**, **animals**, **technology**. Użytkownik może wybrać kategorię, zobaczyć 9 miniatur oraz kliknąć w miniaturę, aby zobaczyć powiększone zdjęcie w modalu.
+
 
 ## Instalacja
 
 1. Sklonuj repozytorium:
 
    ```bash
-   git clone https://github.com/Luki20091/photo-gallery.git
-   cd photo-gallery
+   git clone https://github.com/Luki20091/react-router-dom.git
+   cd react-router-dom
    ```
 
 2. Zainstaluj zależności:
 
    ```bash
    npm install
-   npm install axios
+   npm install react-router-dom@6
    ```
 
 4. Uruchom projekt:
